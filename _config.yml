@@ -16,7 +16,7 @@ timezone: America/Guayaquil
 
 title: iVash # the main title
 
-tagline: Ethical Hacking information page | Writeups CTF of HacktheBox \udb80\udda7  # it will display as the subtitle
+tagline: Ethical Hacking Information Page 📒 | Writeups of HackTheBox CTFs 🏁 | Theory of Vulnerabilities 🕷️ | Exploits and Scripts 🐧  # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
