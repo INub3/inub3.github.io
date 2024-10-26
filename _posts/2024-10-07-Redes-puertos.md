@@ -1,7 +1,7 @@
 ---
-title: Puertos
+title: Redes y Puertos
 author: Michael Enriquez
-date: 2024-10-07 14:10:00 +0800
+date: 2024-10-26 14:00:00 +0800
 categories: [Teoría, Redes]
 tags: [Redes, Concepto]
 render_with_liquid: false
@@ -11,6 +11,7 @@ description: Teoría sobre redes, puertos y servicios populares para protocolos 
 ## **Redes**
 
 >Las redes son fundamentales en el hacking porque sirven como el medio principal a través del cual los atacantes acceden, exploran, y explotan sistemas y datos. A través de técnicas como el escaneo de **puertos**, la sniffing de paquetes, y la inyección de comandos, los hackers pueden identificar vulnerabilidades en la infraestructura de red, interceptar comunicaciones, y comprometer sistemas enteros.
+
 
 Las redes tienen una estructura básica, esta estructura es conocida como el modelo OSI, modelo que consta las siguientes 7 capas:
 
@@ -44,6 +45,8 @@ Existen dos protocolos básicos encargados de la conexión en las redes, estos s
 ## **Puertos**
 
 >En Redes, un **puerto** es un punto de comunicación dentro de una dirección IP que permite que diferentes servicios y aplicaciones envíen y reciban datos a través de una red. Los puertos actúan como canales de entrada y salida para el tráfico de datos y son fundamentales para la identificación y gestión de servicios específicos que se ejecutan en un servidor o dispositivo de red.
+
+
 ### Tipos de Puertos
 
 1. **Puertos de Usuario (User Ports) o Puertos Dinámicos/Privados (49152-65535)**:
@@ -164,4 +167,4 @@ Existen dos protocolos básicos encargados de la conexión en las redes, estos s
 | 993    |  ✅  |     | imaps         | IMAP a través de SSL/TLS                                                                                     |
 | 995    |  ✅  |     | pop3s         | POP3 a través de SSL/TLS                                                                                     |
 
-
+---
