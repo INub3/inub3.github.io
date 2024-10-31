@@ -1,6 +1,6 @@
 ---
 title: Redes y Puertos
-author: Michael Enriquez
+author: iv4sh
 date: 2024-10-26 14:00:00 +0800
 categories: [Teoría, Redes]
 tags: [Redes, Concepto]
