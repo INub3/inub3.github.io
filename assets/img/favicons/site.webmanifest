@@ -21,6 +21,6 @@ layout: compress
     }],
   "start_url": "{{ '/index.html' | relative_url }}",
   "theme_color": "#2a1e6b",
-  "background_color": "#ffffff",
+  "background_color": "#000000",
   "display": "fullscreen"
 }
