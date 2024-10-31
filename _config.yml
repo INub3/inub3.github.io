@@ -14,12 +14,12 @@ timezone: America/Guayaquil
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: iVash # the main title
+title: iV4sh # the main title
 
 tagline: Personal Projects 📒 | Writeups of HackTheBox CTFs 🏁 | Theory of Vulnerabilities 🕷️ | Exploits and Scripts 🐧  # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+  Personal Projects, CTFs WriteUp's and Hacking Information :).
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -27,6 +27,9 @@ url: "https://iv4sh.github.io"
 
 linkedin:
   username: michael-enriquez-a593a717a
+
+author:
+  name: Michael Enríquez
 
 github:
   username: iV4sh # change to your GitHub username
