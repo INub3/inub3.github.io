@@ -1,43 +1,42 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://iv4sh.github.io/posts/Redes-puertos/</loc>
-<lastmod>2024-10-30T21:12:05-05:00</lastmod>
-</url>
-<url>
-<loc>https://iv4sh.github.io/categories/</loc>
-<lastmod>2024-10-31T10:50:42-05:00</lastmod>
-</url>
-<url>
-<loc>https://iv4sh.github.io/tags/</loc>
-<lastmod>2024-10-31T10:50:42-05:00</lastmod>
-</url>
-<url>
-<loc>https://iv4sh.github.io/archives/</loc>
-<lastmod>2024-10-31T10:50:42-05:00</lastmod>
-</url>
-<url>
-<loc>https://iv4sh.github.io/about/</loc>
-<lastmod>2024-10-31T10:50:42-05:00</lastmod>
-</url>
-<url>
-<loc>https://iv4sh.github.io/</loc>
-</url>
-<url>
-<loc>https://iv4sh.github.io/tags/redes/</loc>
-</url>
-<url>
-<loc>https://iv4sh.github.io/tags/concepto/</loc>
-</url>
-<url>
-<loc>https://iv4sh.github.io/categories/teor%C3%ADa/</loc>
-</url>
-<url>
-<loc>https://iv4sh.github.io/categories/redes/</loc>
-</url>
-<url>
-<loc>https://iv4sh.github.io/googleb59119f5676b213e.html</loc>
-<lastmod>2024-10-31T10:50:36-05:00</lastmod>
-</url>
+  <url>
+    <loc>https://iv4sh.github.io/posts/Redes-puertos/</loc>
+    <lastmod>2024-10-30T21:12:05-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/categories/</loc>
+    <lastmod>2024-10-31T10:50:42-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/tags/</loc>
+    <lastmod>2024-10-31T10:50:42-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/archives/</loc>
+    <lastmod>2024-10-31T10:50:42-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/about/</loc>
+    <lastmod>2024-10-31T10:50:42-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/</loc>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/tags/redes/</loc>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/tags/concepto/</loc>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/categories/teor%C3%ADa/</loc>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/categories/redes/</loc>
+  </url>
+  <url>
+    <loc>https://iv4sh.github.io/googleb59119f5676b213e.html</loc>
+    <lastmod>2024-10-31T10:50:36-05:00</lastmod>
+  </url>
 </urlset>
