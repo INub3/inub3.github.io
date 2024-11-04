@@ -1,5 +1,5 @@
 ---
-title: Sea WriteUp
+title: "HTB: Sea WriteUp"
 author: iv4sh
 date: 2024-11-03 14:00:00 +0800
 categories: [HackTheBox, Easy]
