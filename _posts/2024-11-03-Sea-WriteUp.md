@@ -5,7 +5,7 @@ date: 2024-11-03 14:00:00 +0800
 categories: [HackTheBox, Easy]
 tags: [XSS, RCE, LFI]
 render_with_liquid: false
-description: Guia didáctica para la resolución de la maquina **Sea** de HackTheBox
+description: Guia didáctica para la resolución de la maquina Sea de HackTheBox
 ---
 
 >El siguiente WriteUp fue creado con el propósito de guiar la resolución de la maquina `Sea` de HackTheBox, además de fomentar una explicación clara de los conceptos, herramientas y vulnerabilidades vistas.
