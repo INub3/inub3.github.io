@@ -87,6 +87,7 @@ gobuster dir -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-li
 | `-x`          | Busca archivos con las extensiones señaladas.                                    |
 | `-t`          | Uso de hilos agilizar la búsqueda. Hacer uso de muchos puede bajar la precisión. |
 | `2>/dev/null` | Para que no impriman los errores en pantalla.                                    |
+
 Mediante el escaneo encontramos los siguientes directorios y archivos:  
 ![Page](/assets/img/sea/GoBuster1.png)  
 Nuestro directorio de interés es **themes** al cual no tenemos acceso dado el código que devuelve, pero del cual podemos seguir listando subdirectorios y archivos.  
@@ -241,6 +242,7 @@ john --format=bcrypt --wordlist=/usr/share/wordlist/rockyou.txt hash.txt
 | `--format=`  | tipo de desencriptado.                            |
 | `--wordlist` | Diccionario de contraseñas, en este caso rockyou. |
 | `hash.txt`   | Archivo que contiene el hash                      |
+
 ![Page](/assets/img/sea/hash.png)  
 ### Acceso SSH
 
@@ -270,6 +272,7 @@ netstat -tuln
 | `-u`      | Muestra las conexiones de tipo **UDP**.                                                                                  |
 | `-l`      | Filtra por los puertos en modo escucha.                                                                                  |
 | `-n`      | Muestra los resultados en formato numérico envés de resolver a los **DNS**.                                              |
+
 Es los resultados del comando podemos observar los siguientes resultados:  
 ![Page](/assets/img/sea/netstat.png)  
 De estos llama la atención el `127.0.0.1:8080` por lo que aplicaremos **Port-Forwarding** para acceder al puerto interno, de manera local desde nuestra maquina.
