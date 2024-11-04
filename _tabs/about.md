@@ -13,6 +13,7 @@ Mi nombre es **Michael Enríquez**, soy un estudiante de la Escuela Politécnica
 * ✉️ E-mail: michaelenriquez525@gmail.com
 * 🗃️ GitHub: https://github.com/iv4sh
 * 👔 LinkedIn: https://www.linkedin.com/in/michael-enriquez-a593a717a
+* 👨‍💻 HackTheBox: https://app.hackthebox.com/users/1928902
 
 ---
 
