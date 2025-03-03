@@ -29,23 +29,23 @@ Esencial para ampliar nuestro rango de ataque, para esto podemos basarnos en los
 
 ``` bash
 curl -s https://crt.sh/\?q\=<URL>\&output\=json | jq .
-
 #Podemos filtrar los resultados por subdominios
 curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -u
 ```
 
 3. **Servidores Alojados**
 	Una vez identificados una serie de hosts podemos generar un lista de direcciones IP para ejecutarles en *Shodan*, aplicativo que se puede utilizar para encontrar dispositivos y sistemas conectados permanentemente a internet.
+
 ``` bash
 # Genera la lista de ip's en funcion de los subdominios
 $ for i in $(cat subdomainlist);do host $i | grep "has address" | grep <URL> | cut -d" " -f4 >> ip-addresses.txt;done
-
 # Ejecuta shodan en cada una de las IP para buscar conincidencias
 $ for i in $(cat ip-addresses.txt);do shodan host $i;done
 ```
 
 4. **Certificados DNS**
-	Podemos obtener todos los registros disponibles del dominio mediante la herramienta `dig`
+	Podemos obtener todos los registros disponibles del dominio mediante la herramienta `dig`.
+
 ``` bash
 dig any <URL>
 ```
