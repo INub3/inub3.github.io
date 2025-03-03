@@ -8,7 +8,9 @@ render_with_liquid: false
 description: Teoría sobre la enumeración de servicios basados en la infraestructura, host y protocolos de acceso remoto.
 ---
 
-# Infraestructure Based
+
+# **Infraestructure Based**  
+
 
 > La enumeración basada en la infraestructura se basa en la composición física tanto externa como interna de la red del objetivo. Abarca la información del dominio, recursos en la nube y el personal de la empresa, toda esta es información nos puede ayudar a conocer mas acerca de nuestro objetivo y en muchos casos este será nuestro punto de inicio. 
 
@@ -72,10 +74,12 @@ intext:<Nombre de la empresa> inurl:blob.core.windows.net
 ---
 
 ---
-
-# Host Based
-
+  
+# **Host Based**  
+  
+  
 > La enumeración basada en Host consiste en la investigación de los servicios dados por un sistema especifico en una red. Aquí entra en juego la enumeración de los puertos que brindan alguno de los siguientes servicios: FTP, SMB, NFS, DNS, SMTP, IMAP / POP3, SNMP, MySQL, MSSQL, Oracle TNS, IPMI.
+
 
 ## File Transfer Protocol (FTP)
 
@@ -263,17 +267,18 @@ dig any <Nombre del dominio> @<IP>
 ```
 
 5. La transferencia de zona **AXFR** (Asynchronous Full Transfer Zone)se refiere a la transferencia de zona a otro servidor DNS.
+  
 ``` bash
 dig axfr <Nombre del dominio> @<IP>
-
 # Transferencia de zona interna
 dig axfr internal.<Nombre del dominio> @<IP>
 ```
-
+  
 6. Los registro de tipo **A** se pueden descubrir mediante un ataque de fuerza bruta con la herramienta *dnsenum*.
+  
 ``` bash
 dnsenum --dnsserver <IP> --enum -p 0 -s 0 -o <Archivo-destino> -f Wordlist.txt <dominio.tld> 
-```
+```  
 
 
 ## Simple Mail Transfer Protocol (SMTP)
@@ -304,12 +309,14 @@ Existen varios comandos que podemos usar dentro del servicio, algunos son los si
 
 Podemos usar los comandos **VRFY**, **EXPN** y **RCPT TO** para enumerar usuarios registrados en el servidor de correo de manera manual.
 
-También podemos usar la herramienta SMTP-user-enum de [Pentest Monkey](https://pentestmonkey.net/tools/user-enumeration/smtp-user-enum)
+También podemos usar la herramienta SMTP-user-enum de [Pentest Monkey](https://pentestmonkey.net/tools/user-enumeration/smtp-user-enum).
+  
 ``` bash
 smtp-user-enum -M VRFY -U <wordlist> -t <IP>
 ```
 
-**NMAP** Presenta varios scripts que contienen comandos SMTP, utiliza el comando HELLO para enumerar todos los comandos usables en el servicio. Uno de los scripts NSE mas importantes es el *smtp-open-relay* para identificar si el servicio es vulnerable a **mail relaying** a través de 16 pruebas (tal como se haría con MetasPloit) y el script *smtp-enum-users.nse* para enumerar posibles usuarios.
+**NMAP** Presenta varios scripts que contienen comandos SMTP, utiliza el comando HELLO para enumerar todos los comandos usables en el servicio. Uno de los scripts NSE mas importantes es el *smtp-open-relay* para identificar si el servicio es vulnerable a **mail relaying** a través de 16 pruebas (tal como se haría con MetasPloit) y el script *smtp-enum-users.nse* para enumerar posibles usuarios.  
+
 ``` bash
 sudo nmap <IP> -p25 --script smtp-open-relay -v
 ```
@@ -340,14 +347,15 @@ Para la comunicación usan comandos en formato *ASCII*. Esto son algunos de los 
 Los servicios de IMAP y POP3 como sus variantes cifradas (IMAPs y POP3s) pueden ser enumerados de manera similar:
 
 1. **NMAP:** Usando los NSE scripts de nmap podemos llegar a enumerar las capacidades del servidor y el CommonName.
-2. **CURL:** Podemos logearnos al servicio de IMAPs mediante el comandos CURL haciendo uso de una sesión con credenciales conocidas.
+2. **CURL:** Podemos logearnos al servicio de IMAPs mediante el comandos CURL haciendo uso de una sesión con credenciales conocidas.  
+
 ``` bash
 # Enumera los buzones disponibles
 curl -k 'imaps://<IP>' --user user:password
-
 # Despliega mucha información acerca del servidor, como se establece la conección e informacion acerca del cifrado
 curl -k 'imaps://<IP>' --user user:password -v
-```
+```  
+
 #### Interacción y enumeración SSL
 
 Para interactuar con el servidor SSL de IMAP y POP3 podemos usar la herramienta **openssl** y **ncat**. con los siguientes comandos:
@@ -481,7 +489,7 @@ podemos hacer uso del script *oracle-sid-brute* para intentar descubrir el SID d
 sudo nmap -p1521 -sV <IP> --script oracle-sid-brute
 ```
 ##### ODAT
-Esta herramienta nos puede ayudar también a descubrir información sobre el servicio y sus componentes. Podemos recuperar nombres de bases de datos, versiones, procesos, cuentas de usuario, vulnerabilidades, ect. Con una mayor potencia que NMAP
+Esta herramienta nos puede ayudar también a descubrir información sobre el servicio y sus componentes. Podemos recuperar nombres de bases de datos, versiones, procesos, cuentas de usuario, vulnerabilidades, ect. Con una mayor potencia que NMAP.  
 Instalación:
 ``` bash
 git clone https://github.com/quentinhardy/odat.git
@@ -499,7 +507,7 @@ Uso:
 ```
 ##### SQLcl
 Esta herramienta nos ayudara a establecer una conexión con el servicio, funciona de una manera muy similar a slqplus
-Instalación: Descargamos el script de su pagina oficial de [Oracle](https://www.oracle.com/database/technologies/instant-client.html)
+Instalación: Descargamos el script de su pagina oficial de [Oracle](https://www.oracle.com/database/technologies/instant-client.html).  
 Uso:
 ``` bash
 # insgrsamos sin sessión
@@ -555,8 +563,9 @@ msf6 auxiliary(scanner/ipmi/ipmi_dumphashes) > run
 
 ---
 
-# Remote Management Protocols
+# **Remote Management Protocols**  
 
+  
 > El manejo remoto de dispositivos es esencial para realizar la administración o modificación de los servicios que puede brindar un sistema. Que se pueda hacer de manera remota supone un ahorro de tiempo al no ser necesario estar físicamente presente en el servidor y el entorno de trabajo sigue siendo el mismo, sin embargo abre la posibilidad de ser objetivos de atacantes en el caso de estar mal configurado.
 
 ## Linux
