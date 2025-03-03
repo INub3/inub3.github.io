@@ -26,10 +26,11 @@ Esencial para ampliar nuestro rango de ataque, para esto podemos basarnos en los
 2. **crt.sh**
 	Es un fuente de la cual podemos obtener subdominios mediante los registros del certificado de transparencia, funciona mediante la verificación de certificados digitales emitidos por una autoridad de certificaciones en registros de pentesting.
 	Esta web nos permite reportar los resultados en formato JSON cómodamente desde consola:
+
 ``` bash
 curl -s https://crt.sh/\?q\=<URL>\&output\=json | jq .
 
-# Podemos filtrar los resultados por subdominios
+#Podemos filtrar los resultados por subdominios
 curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -u
 ```
 
@@ -55,10 +56,9 @@ Las empresas suelean alojar respaldos en la nube, como AWS (Amazon), GCP (Google
 
 1. **Búsqueda por Google Dorks**
 	Podemos buscar respaldos en la nube de una empresa mediante búsquedas de Google Dorks, utilizando las etiquetas *inurl:* e *intext* bajo estas búsquedas podremos encontrar documentos de texto, presentaciones, códigos, código fuente, entre otros:
-```
+``` bash
 # Para busquedas de AWS en Google
 intext:<Nombre de la empresa> inurl:amazonaws.com
-
 # Para busquedas de Azure
 intext:<Nombre de la empresa> inurl:blob.core.windows.net
 ```
