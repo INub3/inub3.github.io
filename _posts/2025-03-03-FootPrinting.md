@@ -280,7 +280,7 @@ dig axfr <Nombre del dominio> @<IP>
 dig axfr internal.<Nombre del dominio> @<IP>
 ```
   
-6. os registro de tipo **A** se pueden descubrir mediante un ataque de fuerza bruta con la herramienta *dnsenum*.
+6. Los registro de tipo **A** se pueden descubrir mediante un ataque de fuerza bruta con la herramienta *dnsenum*.
 ``` bash
 dnsenum --dnsserver <IP> --enum -p 0 -s 0 -o <Archivo-destino> -f Wordlist.txt <dominio.tld> 
 ```  
