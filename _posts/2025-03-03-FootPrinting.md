@@ -272,15 +272,15 @@ dig CH TXT version.bind <IP>
 dig any <Nombre del dominio> @<IP>
 ```
 
-5. La transferencia de zona **AXFR** (Asynchronous Full Transfer Zone)se refiere a la transferencia de zona a otro servidor DNS.
-  
+5. La transferencia de zona **AXFR** (Asynchronous Full Transfer Zone)se refiere a la transferencia de zona a otro servidor DNS. 
 ``` bash
 dig axfr <Nombre del dominio> @<IP>
 # Transferencia de zona interna
 dig axfr internal.<Nombre del dominio> @<IP>
 ```
   
-6. Los registro de tipo **A** se pueden descubrir mediante un ataque de fuerza bruta con la herramienta *dnsenum*.
+Los registro de tipo **A** se pueden descubrir mediante un ataque de fuerza bruta con la herramienta *dnsenum*.
+
 ``` bash
 dnsenum --dnsserver <IP> --enum -p 0 -s 0 -o <Archivo-destino> -f Wordlist.txt <dominio.tld> 
 ```  
