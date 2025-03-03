@@ -14,7 +14,7 @@ description: Teoría sobre la enumeración de servicios basados en la infraestru
 
 > La enumeración basada en la infraestructura se basa en la composición física tanto externa como interna de la red del objetivo. Abarca la información del dominio, recursos en la nube y el personal de la empresa, toda esta es información nos puede ayudar a conocer mas acerca de nuestro objetivo y en muchos casos este será nuestro punto de inicio. 
 
-## Información del Dominio
+### Información del Dominio
 
 La información del dominio es una fundamental para conocer la presencia del objetivo en internet. Por lo tanto la recopilación de información nos ayudara a comprender la funcionalidad de la empresa, sus tecnologías y la infraestructura que hacen que esta pueda brindar sus servicios.
 
@@ -81,7 +81,7 @@ intext:<Nombre de la empresa> inurl:blob.core.windows.net
 > La enumeración basada en Host consiste en la investigación de los servicios dados por un sistema especifico en una red. Aquí entra en juego la enumeración de los puertos que brindan alguno de los siguientes servicios: FTP, SMB, NFS, DNS, SMTP, IMAP / POP3, SNMP, MySQL, MSSQL, Oracle TNS, IPMI.
 
 
-## File Transfer Protocol (FTP)
+### File Transfer Protocol (FTP)
 
 El protocolo se ejecuta en la capa de aplicación mediante TCP, funciona con el puerto 21 de TCP por defecto defecto usando el puerto 20 para establecer una comunicación de transferencia de datos.
 - **Activa:** La variante activa de FTP ocurre cuando se establece la conexión exclusivamente por el puerto TCP 21, sin embargo el protocolo no puede responder debido a restricciones con el firewall.
@@ -104,6 +104,7 @@ telnet <IP-servidorFTP> 21
 # Si el servidor tiene cifrado TLS/SSL:
 openssl s_client -connect <IP-servidorFTP>:21 -starttls ftp
 ```
+
 #### Puntos Importantes
 
 **Archivos de Configuración:**
@@ -116,11 +117,11 @@ Si somos un usuario con los permisos necesarios podremos tanto descargar como su
 `put <ruta del archivo>`: Subir un archivo al servidor FTP.
 
 
-## Server Message Block (SMB)
+### Server Message Block (SMB)
 
 Es un protocolo de cliente servidor que regula el acceso a archivos y directorios completos así como otros recursos de red como impresoras, enrutadores o interfaces de red. Principalmente funcional para Windows, pero el servicio *Samba* permite el uso de SMB en distribuciones basadas en Unix.
 
-### Samba
+#### Samba
 
 Samba implementa el protocolo de red CIFS (Common Internet File System) protocolo de SMB creado por Microsoft que permite la comunicación efectiva con dispositivos antiguos. Cuando Samba se comunica a través del servicio NetBIOS la conexión se producen a través de los puertos TCP *137*, *138* y *139*. Por otro lado CIFS opera exclusivamente en el puerto TCP *445*.
 Existe versiones mas actuales como SMB 2 y SMB 3, SMB 1 (CIFS) se considera obsoleto pero usable en entornos específicos.
@@ -192,15 +193,17 @@ nxc smb <IP> --share -u '' -p ''
 En lugar de CrackMapExec podemos usar [NetExec](https://github.com/Pennyw0rth/NetExec) una herramienta basada en CrackMapExec pero mas actual y funcional. Se usa de la misma manera y con los mismos comandos.
 
 
-## Network File System (NFS)
+### Network File System (NFS)
 
 Tiene el mismo propósito que SMB, el cual es acceder a sistemas y archivos a través de la red como si fueran locales. en su versión mas actual *NFSv4* el usuario debe autenticarse, esta es una versión que incluye **Kerberos** y funciona a través del Firewall e internet haciéndola mas segura que sus predecesoras.
+
 #### Autentificación
 
 El tipo de autentificacion mas comun es en este servicio es atraves del UID/GID de los usuarios en el sistema UNIX. Dado que alguien puede replicar los permisos de los usuarios solo se debe usar en redes de confianza con configuraciones cautelosas.
 
 **Ruta de configuración:**
 La ruta de configuración del servicio NFS es `/etc/exports`, un archivo simple donde solo se especifican las rutas compartidas con una configuraciones bastante básicas.
+
 #### Enumeración del servicio
 
 El servicio funciona sobre los puertos *TCP 111, 2049*, con NMAP podemos obtener información mediante varios de los scripts que ofrece los mismos que abusan del host a través de RPC.
@@ -221,17 +224,19 @@ sudo umount ./ShareFile
 ```
 
 
-## Domain Name System (DNS)
+### Domain Name System (DNS)
 
 Mediante los nombres de Dominio podemos acceder a un servidor web en el que el administrados haya usado una o mas direcciones IP especificas. Por lo tanto el **DNS** es un sistema para resolver los nombres de los ordenadores en direcciones IP.
 
 El DNS puede no esta cifrado sin embargo existe protocolos como *DNS over TLS* o *DNS over HTTPs* que lo filtran además del protocolo de red *DNSCrypt*. La comunicación con este servicio ocurre a través del puerto **TCP 53**.
-### Enumeración DNS
+  
+#### Enumeración DNS
 
 Podemos encontrar los archivos de configuración DNS en las siguientes rutas:
 - `/etc/bind/named.config.local`
 - `/etc/bind/named.config.options`
 - `/etc/bind/named.config.log`
+
 #### Códigos de Registro DNS
 
 La enumeración del servicio DNS se basa en el envió de consultas hacia el dominio, existen una serie de registros que nos indican el tipo de información que estos proveen, algunos de estos son:
@@ -243,6 +248,7 @@ La enumeración del servicio DNS se basa en el envió de consultas hacia el domi
 | NS           | Devuelve los nombres DNS del dominio                                |
 | TXT          | Puede contener información diversa                                  |
 | SOA          | Información de la zona DNS y la dirección del correo administrativo |
+
 
 #### Solicitudes DNS
 
@@ -280,11 +286,12 @@ dnsenum --dnsserver <IP> --enum -p 0 -s 0 -o <Archivo-destino> -f Wordlist.txt <
 ```  
 
 
-## Simple Mail Transfer Protocol (SMTP)
+### Simple Mail Transfer Protocol (SMTP)
 
 Es un Protocolo para enviar correos electrónicos en una red IP, suele combinarse con el servicio IMAP o POP3 que pueden buscar y enviar correos electrónicos. El servicio SMTP establece la conexión mediante el puerto *TCP 25*, o en versiones mas recientes por el puerto *TCP 587* para usuarios autenticados y correos cifrados mediante **STARTTLS**.
 
 **Ruta del archivo de configuración:** `/etc/postfix/main.cf`
+
 #### Interacción con el servicio
 
 Podemos conectarnos al servicio por **TelNet** especificando la dirección IP y el puerto correspondiente al servicio.
@@ -321,7 +328,7 @@ sudo nmap <IP> -p25 --script smtp-open-relay -v
 ```
 
 
-## IMAP / POP3
+### IMAP / POP3
 
 Internet Message Access Protocol (**IMAP**) nos permite el acceso a correos electrónicos desde un servidor de correo. A diferencias de Post Office Protocol (**POP3**), IMAP permite la gestión de correos directamente en el servidor estructurándolos por carpetas.
 
@@ -341,7 +348,7 @@ Para la comunicación usan comandos en formato *ASCII*. Esto son algunos de los 
 | a FETCH 1:* (FLAGS)     | Despliega las flags para cada uno de los correos | RETR/DELE id      | Mostrar/borrar el correo solicitado por la IP   |
 | a FETCH n BODY[]        | Despliega el correo con cabecera y cuerpo        | QUIT              | Cierra la conexión con el servidor POP3         |
 
-### Enumeración del servicio
+#### Enumeración del servicio
 
 Los servicios de IMAP y POP3 como sus variantes cifradas (IMAPs y POP3s) pueden ser enumerados de manera similar:
 
@@ -366,7 +373,7 @@ openssl s_client -connect <IP>:pop3s
 openssl s_client -connect <IP>:imaps
 ```
 
-## Simple Network Management Protocol (SNMP)
+### Simple Network Management Protocol (SNMP)
 
 Este es un protocolo creado para monitorear dispositivos de red, también se puede usar para realizar configuraciones de manera remota y manejar tareas de configuración. El hardware habilitado para SNMP incluye **routers**, **switches**, **servers**, **IoT devices**, entre otros.
 Su ultima versión es SNMPv3 la misma que mejora mucho su seguridad pero también su complejidad de uso.
@@ -384,7 +391,7 @@ Algunos protocolos y características del servicio SNMP:
 4. **Community Strings** una especie de contraseñas que determinan si se puede o no ver la información solicitada. 
 
 
-### Enumeración del servicio
+#### Enumeración del servicio
 
 Existe varias herramientas como *snmp-check*, *snmpwalk*, *OneSixtyOne* y *braa*.
 
@@ -413,11 +420,12 @@ sudo apt install braa
 braa <community string>@<IP>:.1.3.6.*
 ```
 
-## MySQL
+### MySQL
 
 **MySQL** es un sistema de gestión de bases de datos relacionales SQL de código abierto y respaldado por Oracle. El sistema de bases de datos puede procesar rápidamente una gran cantidad de datos. El servidor MySQL es el sistema de gestión de bases de datos real. Se encarga del almacenamiento y distribución de datos en una estructura de tablas. Estas tablas se almacenan en un solo archivo de extensión *.sql*.
 
 El servicio de MySQL se conecta comúnmente por el puerto *TCP 3306*.
+
 #### Comando Básicos SQL 
 
 | Comando                                                 | Descripción                                                       |
@@ -446,13 +454,14 @@ mysql -u <user> -p<password> -h <IP>
 mysql -u <user> -p<password> <Base de datos> < archivo.sql
 ```
 
-## Microsoft SQL
+### Microsoft SQL
 
 **MSSQL** es un sistema de gestión de base de datos relacionales en SQL que a diferencia de MySQL esta es de código cerrado y se escribió inicialmente para sistemas operativos.
 
 El **Cliente MSSQL** es gestionado por SQL Server Mangement Studio (SSMS) este es el nodo principal para la gestión del servidor y la configuración a corto y largo plazo
 
 Puede configurarse mediante **Windows Authentication**, lo que significa que el sistema operativo Windows procederá la solicitud de inicio de sesión y utilizara la base de datos SAM o el controlador de dominio alojado en *Active Directory* antes de establecer la conexión. Haciendo que cuando se comprometa una cuenta esta se puede usar para el escalado de privilegios o un movimiento lateral en el entorno del dominio.
+
 #### Enumeración del servicio
 
 El servicio MSSQL corre normalmente por el puerto *TCP 1433* y podemos enumerarlo de las siguientes maneras:
@@ -473,7 +482,7 @@ msf6 auxiliary(scanner/mssql/mssql_ping) > run
 python3 mssqlclient.py <user>@<IP> -windows-auth
 ```
 
-## Oracle TNS
+### Oracle TNS
 
 El servidor **Oracle Transparent Network Substrate** (TNS) es un sistema de comunicación entre bases de datos Oracle y aplicaciones a través de redes.
 Este servicio tiene dos archivos básicos de configuración: *tnsnames.ora* y *listener.ora* encargados de ser transmisor y receptor del servicio respectivamente.
@@ -481,15 +490,18 @@ Este servicio tiene dos archivos básicos de configuración: *tnsnames.ora* y *l
 Este servicio corre por el puerto *TCP 1521*
 
 Para este servicio son importantes los códigos únicos **SID** que son valores predeterminados para cada usuario que identifican una instancia de la base de datos en particular.
+
 #### Enumeración del servicio
 
 Al servicio lo podemos enumerar básicamente con 3 herramientas: **NMAP**, **ODAT** y **SQLcl** (básicamente porque sqlplus nunca me funciono)
+
 ##### NMAP
 podemos hacer uso del script *oracle-sid-brute* para intentar descubrir el SID de algún usuario
 ``` bash
 sudo nmap -p1521 -sV <IP> --script oracle-sid-brute
 ```
 ##### ODAT
+
 Esta herramienta nos puede ayudar también a descubrir información sobre el servicio y sus componentes. Podemos recuperar nombres de bases de datos, versiones, procesos, cuentas de usuario, vulnerabilidades, ect. Con una mayor potencia que NMAP.  
 Instalación:
 ``` bash
@@ -518,7 +530,7 @@ Uso:
 connect usuario/password@//host:puerto/servicio
 ```
 
-## Intelligent Platform Management Interface (IPMI)
+### Intelligent Platform Management Interface (IPMI)
 
 Es un conjunto de especificaciones para sistemas de administracion de host utilizados para el monitoreo del sistema. Funcionan independientemente de la BIOS, la CPU, el Firmware y el sistema operativo.
 
@@ -569,10 +581,11 @@ msf6 auxiliary(scanner/ipmi/ipmi_dumphashes) > run
   
 > El manejo remoto de dispositivos es esencial para realizar la administración o modificación de los servicios que puede brindar un sistema. Que se pueda hacer de manera remota supone un ahorro de tiempo al no ser necesario estar físicamente presente en el servidor y el entorno de trabajo sigue siendo el mismo, sin embargo abre la posibilidad de ser objetivos de atacantes en el caso de estar mal configurado.
 
-## Linux
+### Linux
 
 En Linux existe una gran variedad de maneras de conectarnos a un dispositivo de manera remota, estos son algunos de los protocolos, servidores y aplicaciones mas importantes
-### Secure Shell (SSH)
+
+#### Secure Shell (SSH)
 
 Este protocolo permite que dos ordenadores establezcan una conexión cifrada dentro de una red posiblemente insegura a través del puerto *TCP 22*. Existen dos protocolos:
 SSH-2: Es el protocolo de SSH mas avanzado en seguridad, velocidad, estabilidad y cifrado.
@@ -588,6 +601,7 @@ Existen 6 tipos de autentificación utilizadas por OpenSSH.
 
 **Configuración predeterminada**
 La configuración se aloja en la ruta `/etc/ssh/sshd_config`, no se recomienda la configuración predeterminada dado que puede tener una vulnerabilidad de inyección de comandos en la versión 7.2p1 en 2016.
+
 #### Enumeración del servicio
 
 Una de las herramientas que podemos utilizar es [ssh-audit](https://github.com/jtesta/ssh-audit) que comprueba la configuración del  lado del cliente y del servidor y muestra información general como el tipo de cifrado y que métodos de autentificación usa el servidor.
@@ -600,7 +614,7 @@ Se puede forzar la conexión por contraseña para intentar ataques de fuerza bru
 ssh -v <User>@<IP> -o PreferredAuthentications=password
 ```
 
-### Rsync
+#### Rsync
 
 Esta es una herramienta rápida y eficiente para copiar archivos de manera local y remota. Es conocida por el su modo de transmisión delta, modo que optimiza la transferencia si en el lado del cliente existe una versión del archivo.
 De manera predeterminada usa el puerto *TCP 873* y se puede configurar para utilizar SSH para una trasmisión segura.
@@ -622,7 +636,7 @@ rsync -av --list-only rsync://127.0.0.1/dev
 rsync -av --list-only -e "ssh -p2222" rsync://127.0.0.1/dev
 ```
 
-### R-Services
+#### R-Services
 
 Son un conjunto de servicios para permitir el acceso remoto o emitir comandos entre hosts Unix a través de TCP/IP. Fueron los principales servicios hasta la llegada de SSH. Al igual que Telnet los R-Services transmiten la información a través de la red sin cifrarse.
 
@@ -638,15 +652,17 @@ Los ataques a este conjunto de servicios se extienden a través de los puertos *
 El archivo `hosts.equiv` contiene una lista de hosts de confianza y se utiliza para otorgar accesos a otros sistemas.
 
 ---
-## Windows
+### Windows
 
 La administración remota esta habilitada de manera predeterminada a partir de Windows Server 2016. Esta función incluye al protocolo WS-Management, diagnostico y control de Hardware del servidor.
 
 los principales componentes utilizados para la gestión remota de Windows server y Windows son los siguientes:
-### Remote Desktop Protocol (RDP)
+
+#### Remote Desktop Protocol (RDP)
 
 Este protocolo permite que los comandos de visualización y control se transmitan a través de la **interfaz** grafica de usuario cifrada por redes IP. Utiliza el puerto por defecto *TCP y UDP 3389*.
 Para establecer conexión tanto el firewall de la red como el del servidor deben permitir conexiones del exterior. en caso de usar **NAT** se debe de usar la dirección IP publica.
+
 #### Enumeración del servicio
 
 Podemos identificar rápidamente mediante **NMAP** si NLA (Autentificación de nivel de Red) esta habilitado
@@ -670,10 +686,11 @@ Desde Linux podemos interactuar con el servicio mediante *xfreerdp*, *rdesktop* 
 xfreerdp /u:<User> /p:"P455w0rd!" /v:<IP>
 ```
 
-### WinRM
+#### WinRM
 
 Es un protocolo de administración remota integrado en Windows basado en línea de comandos, WinRM se comunica por los puertos *TPC 5986* y *5985* el primero usando HTTPS, ya que los puertos 80 y 443 se usaban anteriormente para esta tarea.
-Se integra con Windows Remote Shell (**WinRS**) para ejecución de comandos
+Se integra con Windows Remote Shell (**WinRS**) para ejecución de comandos.
+
 #### Enumeración del servicio
 
 En Linux podemos utilizar [evil-winrm](https://github.com/Hackplayers/evil-winrm) para acceder a uno o mas servidores remotos. En Windows basta con ejecutar Test-WsMan desde la PowerShell.
@@ -681,7 +698,7 @@ En Linux podemos utilizar [evil-winrm](https://github.com/Hackplayers/evil-winrm
 evil-winrm -i <IP> -u <user> -p <Password>
 ```
 
-### Windows Management Instrumentation (WMI)
+#### Windows Management Instrumentation (WMI)
 
 Permite el acceso de lectura y escritura a casi todas las configuraciones en los sistemas Windows, por ende es la interfaz mas critica en el entorno remoto. Se accede a través de la PowerShell, VBScript o la consola (WMIC).
 
@@ -692,8 +709,9 @@ La comunicación con el servicio se da por el puerto *TCP 135* y después de est
 /usr/share/doc/python3-impacket/examples/wmiexec.py <User>:"P455w0rD!"@<IP> "hostname"
 ```
 
+---
 
 ---
-# Referencias
+## Referencias
 
 [1] Sitios web de interés: [crt.sh](https://crt.sh/), [Domain.Glass](https://domain.glass/), [GrayHatWarfare](https://grayhatwarfare.com/)
