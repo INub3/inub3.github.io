@@ -9,7 +9,7 @@ description: Teoría sobre la enumeración de servicios basados en la infraestru
 ---
 
 
-# **Infraestructure Based**  
+## **Infraestructure Based**  
 
 
 > La enumeración basada en la infraestructura se basa en la composición física tanto externa como interna de la red del objetivo. Abarca la información del dominio, recursos en la nube y el personal de la empresa, toda esta es información nos puede ayudar a conocer mas acerca de nuestro objetivo y en muchos casos este será nuestro punto de inicio. 
@@ -75,7 +75,7 @@ intext:<Nombre de la empresa> inurl:blob.core.windows.net
 
 ---
   
-# **Host Based**  
+## **Host Based**  
   
   
 > La enumeración basada en Host consiste en la investigación de los servicios dados por un sistema especifico en una red. Aquí entra en juego la enumeración de los puertos que brindan alguno de los siguientes servicios: FTP, SMB, NFS, DNS, SMTP, IMAP / POP3, SNMP, MySQL, MSSQL, Oracle TNS, IPMI.
@@ -256,12 +256,12 @@ dig soa <Dominios/Subdominio>
 dig ns <Nombre del dominio> @<IP>
 ```
 
-3. Es posible consultar la **versión** del servidor DNS mediante una consulta de CHAOS y tipo TXT (esta entrada debe existir en el servidor)
+3. Es posible consultar la **versión** del servidor DNS mediante una consulta de CHAOS y tipo TXT (esta entrada debe existir en el servidor).
 ``` bash
 dig CH TXT version.bind <IP>
 ```
 
-4. La opción **ANY** se usa para ver todos los registros disponibles que el servidor este dispuesto a revelar (No se mostraran TODAS las entradas de las zonas)
+4. La opción **ANY** se usa para ver todos los registros disponibles que el servidor este dispuesto a revelar (No se mostraran TODAS las entradas de las zonas).
 ``` bash
 dig any <Nombre del dominio> @<IP>
 ```
@@ -274,8 +274,7 @@ dig axfr <Nombre del dominio> @<IP>
 dig axfr internal.<Nombre del dominio> @<IP>
 ```
   
-6. Los registro de tipo **A** se pueden descubrir mediante un ataque de fuerza bruta con la herramienta *dnsenum*.
-  
+6. os registro de tipo **A** se pueden descubrir mediante un ataque de fuerza bruta con la herramienta *dnsenum*.
 ``` bash
 dnsenum --dnsserver <IP> --enum -p 0 -s 0 -o <Archivo-destino> -f Wordlist.txt <dominio.tld> 
 ```  
@@ -383,6 +382,8 @@ Algunos protocolos y características del servicio SNMP:
 3. **Identificador único** (OID) representa un nodo en un espacio de nombres jerárquicos. Es una secuencia de números que identifica de forma única a cada nodo.
 
 4. **Community Strings** una especie de contraseñas que determinan si se puede o no ver la información solicitada. 
+
+
 ### Enumeración del servicio
 
 Existe varias herramientas como *snmp-check*, *snmpwalk*, *OneSixtyOne* y *braa*.
@@ -563,7 +564,7 @@ msf6 auxiliary(scanner/ipmi/ipmi_dumphashes) > run
 
 ---
 
-# **Remote Management Protocols**  
+## **Remote Management Protocols**  
 
   
 > El manejo remoto de dispositivos es esencial para realizar la administración o modificación de los servicios que puede brindar un sistema. Que se pueda hacer de manera remota supone un ahorro de tiempo al no ser necesario estar físicamente presente en el servidor y el entorno de trabajo sigue siendo el mismo, sin embargo abre la posibilidad de ser objetivos de atacantes en el caso de estar mal configurado.
@@ -604,7 +605,8 @@ ssh -v <User>@<IP> -o PreferredAuthentications=password
 Esta es una herramienta rápida y eficiente para copiar archivos de manera local y remota. Es conocida por el su modo de transmisión delta, modo que optimiza la transferencia si en el lado del cliente existe una versión del archivo.
 De manera predeterminada usa el puerto *TCP 873* y se puede configurar para utilizar SSH para una trasmisión segura.
 
-Podemos ver algunas formas de enumerar el servicio en la wiki de [Hacktricks](https://book.hacktricks.wiki/en/network-services-pentesting/873-pentesting-rsync.html#873---pentesting-rsync)
+Podemos ver algunas formas de enumerar el servicio en la wiki de [Hacktricks](https://book.hacktricks.wiki/en/network-services-pentesting/873-pentesting-rsync.html#873---pentesting-rsync).
+
 #### Enumeración del servicio
 
 Podemos acceder al servicio para ver a que ficheros o directorios podemos acceder
