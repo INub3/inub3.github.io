@@ -14,7 +14,7 @@ timezone: America/Guayaquil
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: iV4sh # the main title
+title: Nub3 # the main title
 
 tagline: Personal Projects 📒 | Writeups of HackTheBox CTFs 🏁 | Theory of Vulnerabilities 🕷️ | Exploits and Scripts 🐧  # it will display as the subtitle
 
@@ -22,7 +22,7 @@ description: Personal Projects, CTFs WriteUp's and Hacking Information.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://iv4sh.github.io"
+url: "https://inub3.github.io"
 
 linkedin:
   username: michael-enriquez-a593a717a
@@ -31,7 +31,7 @@ author:
   name: Michael Enríquez
 
 github:
-  username: iV4sh # change to your GitHub username
+  username: INub3 # change to your GitHub username
 
 social:
   # Change to your full name.
@@ -40,7 +40,7 @@ social:
   email: michaelenriquez525@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-        - https://github.com/iV4sh # change to your GitHub homepage
+        - https://github.com/INub3 # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
         - https://www.linkedin.com/in/michael-enriquez-a593a717a
