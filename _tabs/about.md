@@ -10,7 +10,7 @@ Mi nombre es **Michael Enríquez**, soy un estudiante de la Escuela Politécnica
 
 * ✉️ E-mail: michaelenriquez525@gmail.com
 * 🗃️ [GitHub](https://github.com/inub3)
-* 👔 [LinkedIn](www.linkedin.com/in/michael-nub3)
+* 👔 [LinkedIn](https://www.linkedin.com/in/michael-nub3)
 * 👨‍💻 [HackTheBox](https://app.hackthebox.com/users/1928902)
 
 ---
