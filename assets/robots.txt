@@ -4,7 +4,9 @@ permalink: /robots.txt
 ---
 
 User-agent: *
-
 Disallow: /norobots/
 
-Sitemap: {{ '/sitemap.xml' | absolute_url }}
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://inub3.github.io/sitemap.xml
