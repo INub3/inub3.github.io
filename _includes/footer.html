@@ -7,6 +7,7 @@
     flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
   "
 >
+  <div>
   <p>
     {{- '©' }}
     <time>{{ 'now' | date: '%Y' }}</time>
@@ -29,6 +30,12 @@
   </p>
 
   <p>
+    <a href="https://inub3.github.io/sitemap.xml">Sitemap</a>
+  </p>
+  </div>
+
+  <div>
+  <p>
     {%- capture _platform -%}
       <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
     {%- endcapture -%}
@@ -46,8 +53,6 @@
 
     {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
   </p>
+  </div>
 
-  <p>
-    <a href="https://inub3.github.io/sitemap.xml">Sitemap</a>
-  </p>
 </footer>
