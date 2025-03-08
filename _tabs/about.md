@@ -9,9 +9,9 @@ order: 4
 Mi nombre es **Michael Enríquez**, soy un estudiante de la Escuela Politécnica Nacional (EPN)🎓. Estudio la carrera de Ingeniería en Ciencias de la Computación; además, tengo mucha afinidad por el campo de la `Ciberseguridad` y `Hacking Etico`. Actualmente, dirijo mi tiempo al estudio de estas dos áreas, de manera guiada por la Universidad y de forma autónoma mediante \_cursos\_ y \_prácticas\_.
 
 * ✉️ E-mail: michaelenriquez525@gmail.com
-* 🗃️ GitHub: https://github.com/iv4sh
-* 👔 LinkedIn: https://www.linkedin.com/in/michael-enriquez-a593a717a
-* 👨‍💻 HackTheBox: https://app.hackthebox.com/users/1928902
+* 🗃️ [GitHub](https://github.com/inub3)
+* 👔 [LinkedIn](www.linkedin.com/in/michael-nub3)
+* 👨‍💻 [HackTheBox](https://app.hackthebox.com/users/1928902)
 
 ---
 
